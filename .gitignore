@@ -70,3 +70,17 @@ fused-src
 /experimental/lib/src/.libs/jpeg_codec_unittest
 /experimental/lib/scripts/gtest-config
 /experimental/lib/configure.scan
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
