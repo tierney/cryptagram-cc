@@ -24,11 +24,10 @@ class Codec {
   bool Write(const int bits);
 
  private:
-  friend class CodecTest;
   FRIEND_TEST(CodecTest, UpdateNext);
 
   void UpdateNext();
-  Coordinate Next();
+  void Next(Coordinate* coord);
 
   Image* img_;
 

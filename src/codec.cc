@@ -1,15 +1,21 @@
 #include "codec.h"
 #include "map-util.h"
+#include "glog/logging.h"
 
 namespace cryptagram {
 
 Codec::Codec(Image* img) : img_(img) {
 }
 
+Codec::~Codec() {
+}
+
 bool Codec::Write(const int bits) {
   const RGB* rgb = FindOrNull(val_to_rgb_, bits);
   if (rgb) {
-    img_->Write(this->Next(), *rgb);
+    Coordinate next;
+    Next(&next);
+    img_->Write(next, *rgb);
 
     UpdateNext();
 
@@ -19,15 +25,23 @@ bool Codec::Write(const int bits) {
 }
 
 void Codec::UpdateNext() {
+  Coordinate coord;
+  Next(&coord);
+  cur_w = coord.w;
+  cur_h = coord.h;
+}
+
+void Codec::Next(Coordinate* coord) {
+  CHECK_NOTNULL(coord);
   if (cur_w + 1 >= img_->width()) {
     // Reset width and increment height.
-    cur_h++;
+    coord->h = cur_h + 1;
 
     if (cur_h <= kSpecialThreshold) {
-      cur_w = kFirstColumnAfterHeader;
+      coord->w = kFirstColumnAfterHeader;
     }
   } else {
-    cur_w++;
+    coord->w = cur_w + 1;
   }
 }
 

@@ -15,8 +15,8 @@ class Image {
 
   bool Write(const Coordinate& coord, const RGB& rgb);
 
-  int width();
-  int height();
+  int width() { return width_; }
+  int height() { return height_; }
 
  private:
   int width_;
