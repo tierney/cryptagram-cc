@@ -101,23 +101,8 @@ AS_IF([test "x$with_tcmalloc" != xno],
     [])])
 AM_CONDITIONAL(USE_LIBTCMALLOC, test "x$with_tcmalloc" != "xno")
 
-dnl Boost specific suffices.
-dnl AS_IF([test -z "${BOOST_LIB_SUFFIX+x}"], [BOOST_LIB_SUFFIX=-mt])
-dnl AC_ARG_VAR([BOOST_LIB_SUFFIX], [Boost library name suffix [default=-mt]])
 
 BOOST_SYSTEM
-
-dnl AC_CHECK_LIB([gtest], [_ZN7testing14InitGoogleTestEPiPPc], ,
-dnl   AC_MSG_WARN([
-
-dnl Missing gtest library. (TODO(tierney): Figure out a correct function name.)
-dnl ]))
-
-dnl AC_CHECK_LIB([gtest_main], [main], ,
-dnl   AC_MSG_ERROR([
-dnl Missing gtest_main.
-dnl Fetch from: http://code.google.com/p/googletest
-dnl ]))
 
 # Checks for header files.
 AC_CHECK_HEADERS([limits.h ltdl.h stddef.h stdint.h string.h jpeglib.h])

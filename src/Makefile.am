@@ -1,7 +1,9 @@
 # Binaries.
 
+AM_CPPFLAGS = -I$(top_srcdir)/include
+
 TESTS =
-bin_PROGRAMS = 
+bin_PROGRAMS =
 noinst_PROGRAMS =
 noinst_LIBRARIES =
 
@@ -11,6 +13,26 @@ bin_PROGRAMS += jpeg_benchmark generate_aesthete_matrices queue_main
 
 queue_main_SOURCES = queue_main.cc queue.h
 queue_main_LDADD = -lpthread
+
+noinst_LIBRARIES += libcodec.a
+libcodec_a_SOURCES = codec.cc codec.h
+
+# noinst_LIBRARIES += librgb.a
+# librgb_a_SOURCES = rgb.h
+
+noinst_LIBRARIES += libimage.a
+libimage_a_SOURCES = image.cc image.h
+
+TESTS += codec_test
+bin_PROGRAMS += codec_test
+codec_test_SOURCES = codec_test.cc
+codec_test_LDFLAGS = -L..
+codec_test_LDADD =
+codec_test_LDADD += libcodec.a
+codec_test_LDADD += libimage.a
+codec_test_LDADD += $(top_srcdir)/lib/libgtest.la
+codec_test_LDADD += $(top_srcdir)/lib/libgtest_main.la
+
 
 # bin_programs += aesthete_thread_runner
 # aesthete_thread_runner_SOURCES = aesthete_thread_runner.cc
@@ -58,7 +80,7 @@ libecc_thread_a_SOURCES = ecc_thread.h ecc_thread.cc
 bin_PROGRAMS += ecc_experiment_main
 ecc_experiment_main_SOURCES = ecc_experiment_main.cc
 ecc_experiment_main_CPPFLAGS = -Wall
-ecc_experiment_main_LDADD =  
+ecc_experiment_main_LDADD =
 ecc_experiment_main_LDADD += libecc_thread.a
 ecc_experiment_main_LDADD += libecc_experiment.a
 ecc_experiment_main_LDADD += libecc_message.a
@@ -68,7 +90,7 @@ ecc_experiment_main_LDADD += libaesthete.a
 ecc_experiment_main_LDADD += libjpeg_codec.a
 ecc_experiment_main_LDADD += reed_solomon/librs_codec.a
 ecc_experiment_main_LDADD += reed_solomon/librs.a
-ecc_experiment_main_LDADD += -lgflags -lglog 
+ecc_experiment_main_LDADD += -lgflags -lglog
 if USE_LIBTCMALLOC
   ecc_experiment_main_CPPFLAGS +=  \
     -fno-builtin-malloc \
@@ -131,7 +153,7 @@ libarray_a_CPPFLAGS = -Wall
 # array_test_LDFLAGS = -L..
 # array_test_LDADD =
 # array_test_LDADD += libarray.a
-# array_test_LDADD += $(top_srcdir)/lib/libgtest.la 
+# array_test_LDADD += $(top_srcdir)/lib/libgtest.la
 # array_test_LDADD += $(top_srcdir)/lib/libgtest_main.la
 
 libexperiment_a_SOURCES = experiment.cc experiment.h
@@ -153,7 +175,7 @@ libjpeg_codec_a_CPPFLAGS = -Wall
 noinst_PROGRAMS += jpeg_codec_unittest
 jpeg_codec_unittest_SOURCES = jpeg_codec_unittest.cc
 jpeg_codec_unittest_CPPFLAGS = -I$(top_srcdir)/include
-jpeg_codec_unittest_LDADD = $(top_builddir)/lib/libgtest.la 
+jpeg_codec_unittest_LDADD = $(top_builddir)/lib/libgtest.la
 jpeg_codec_unittest_LDADD += libjpeg_codec.a
 TESTS += jpeg_codec_unittest
 
@@ -167,12 +189,12 @@ libbase64_a_SOURCES = base64.h base64.cc
 noinst_PROGRAMS += base64_unittest
 base64_unittest_SOURCES = base64_unittest.cc
 base64_unittest_CPPFLAGS = -I$(top_srcdir)/include
-base64_unittest_LDADD = 
-base64_unittest_LDADD += $(top_builddir)/lib/libgtest.la 
-base64_unittest_LDADD += $(top_builddir)/lib/libgtest_main.la 
+base64_unittest_LDADD =
+base64_unittest_LDADD += $(top_builddir)/lib/libgtest.la
+base64_unittest_LDADD += $(top_builddir)/lib/libgtest_main.la
 base64_unittest_LDADD += libbase64.a
 base64_unittest_LDADD += libmodp_b64.a
-TESTS += base64_unittest 
+TESTS += base64_unittest
 
 libstring_piece_a_SOURCES = string_piece.h string_piece.cc base_export.h
 libstring_piece_a_SOURCES += hash_tables.h build_config.h string16.h
@@ -185,4 +207,3 @@ libstring_piece_a_SOURCES += hash_tables.h build_config.h string16.h
 
 # noinst_LIBRARIES += libutils.a
 # libutils_a_SOURCES = utils.h utils.cc
-
