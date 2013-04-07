@@ -5,6 +5,8 @@
 namespace cryptagram {
 
 Codec::Codec(Image* img) : img_(img) {
+  val_to_rgb_[0] = 0;
+  val_to_rgb_[1] = 255;
 }
 
 Codec::~Codec() {
@@ -13,9 +15,7 @@ Codec::~Codec() {
 bool Codec::Write(const int bits) {
   const RGB* rgb = FindOrNull(val_to_rgb_, bits);
   if (rgb) {
-    Coordinate next;
-    Next(&next);
-    img_->Write(next, *rgb);
+    img_->Write(Coordinate(cur_w, cur_h), *rgb);
 
     UpdateNext();
 

@@ -19,8 +19,13 @@ class Image {
   int height() { return height_; }
 
  private:
+  int IndexFromCoordinate(const Coordinate& coord);
+
   int width_;
   int height_;
+
+  // 3 bytes per pixel ind RGB order. width_ * height_ * 3 values.
+  unsigned char* pixel_vals_;
 };
 
 } // namespace cryptagram
