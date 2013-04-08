@@ -41,7 +41,7 @@ void Codec::Next(Coordinate* coord) {
     // Reset width and increment height.
     coord->h = cur_h_ + 1;
 
-    if (cur_h_ < kSpecialThreshold) {
+    if (cur_h_ < kFirstRowAfterHeader) {
       coord->w = kFirstColumnAfterHeader;
     } else {
       coord->w = 0;

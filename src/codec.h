@@ -12,13 +12,14 @@ using std::map;
 
 namespace cryptagram {
 
-const int kSpecialThreshold = 8; // For the header block, we need to not write
-                                 // in the first columns of kSpecialThreshold
+const int kFirstRowAfterHeader = 8; // For the header block, we need to not write
+                                 // in the first columns of kFirstRowAfterHeader
                                  // rows.
 const int kFirstColumnAfterHeader = 8;
 
 class Codec {
  public:
+  // Does not take ownership of img.
   explicit Codec(Image* img);
 
   virtual ~Codec();
