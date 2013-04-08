@@ -14,14 +14,14 @@ class CryptagramTest : public testing::Test {
 
 
 TEST_F(CryptagramTest, Basic) {
-  int width = 9;
-  int height = 8;
+  int width = 10;
+  int height = 10;
   cryptagram::Image img(width, height);
   unsigned char* res = img.GetImage();
   for (int h = 0; h < height; h++) {
     for (int w = 0; w < width; w++) {
       for (int i = 0; i < 3; i++) {
-        printf("%3d ", res[h * width + (3 * w) + i]);
+        printf("%3d ", res[(h * width * 3)+ (3 * w) + i]);
       }
       printf(". ");
     }
@@ -32,14 +32,14 @@ TEST_F(CryptagramTest, Basic) {
 
   cryptagram::Cryptagram cryptagram(&codec);
 
-  string input("a");
+  string input("abc");
   cryptagram.Write(input);
   res = img.GetImage();
   printf("\n");
   for (int h = 0; h < height; h++) {
     for (int w = 0; w < width; w++) {
       for (int i = 0; i < 3; i++) {
-        printf("%3d ", res[h * width + (3 * w) + i]);
+        printf("%3d ", res[(h * width * 3) + (3 * w) + i]);
       }
       printf(". ");
     }

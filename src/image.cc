@@ -30,7 +30,7 @@ bool Image::Write(const Coordinate& coord, const RGB& rgb) {
 int Image::IndexFromCoordinate(const Coordinate& coord) {
   printf("Coord w:%d h:%d\n", coord.w, coord.h);
   int rows = coord.h * width_ * 3;
-  int row_col_idx = rows + coord.w;
+  int row_col_idx = rows + (coord.w * 3);
   printf("  Index: %d\n", row_col_idx);
   return row_col_idx;
 }

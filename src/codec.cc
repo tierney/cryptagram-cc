@@ -15,13 +15,14 @@ Codec::~Codec() {
 }
 
 bool Codec::Write(const int bits) {
-  int interpreted = 0 ? bits <= 0 : 1;
+  int interpreted = bits <= 0 ? 0 : 1;
+  std::cout << "Interpreted: " << interpreted << std::endl;
   const RGB* rgb = FindOrNull(val_to_rgb_, interpreted);
   if (rgb) {
     img_->Write(Coordinate(cur_w_, cur_h_), *rgb);
 
     UpdateNext();
-
+    std::cout << "  Updated coord " << cur_w_ << " " << cur_h_ << std::endl;
     return true;
   }
   return false;
@@ -40,11 +41,14 @@ void Codec::Next(Coordinate* coord) {
     // Reset width and increment height.
     coord->h = cur_h_ + 1;
 
-    if (cur_h_ <= kSpecialThreshold) {
+    if (cur_h_ < kSpecialThreshold) {
       coord->w = kFirstColumnAfterHeader;
+    } else {
+      coord->w = 0;
     }
   } else {
     coord->w = cur_w_ + 1;
+    coord->h = cur_h_;
   }
 }
 
