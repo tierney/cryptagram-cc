@@ -33,6 +33,20 @@ codec_test_LDADD += libimage.a
 codec_test_LDADD += $(top_srcdir)/lib/libgtest.la
 codec_test_LDADD += $(top_srcdir)/lib/libgtest_main.la
 
+noinst_LIBRARIES += libcryptagram.a
+libcryptagram_a_SOURCES = cryptagram.h cryptagram.cc
+
+TESTS += cryptagram_test
+bin_PROGRAMS += cryptagram_test
+cryptagram_test_SOURCES = cryptagram_test.cc
+cryptagram_test_LDFLAGS = -L..
+cryptagram_test_LDADD =
+cryptagram_test_LDADD += libcryptagram.a
+cryptagram_test_LDADD += libcodec.a
+cryptagram_test_LDADD += libimage.a
+cryptagram_test_LDADD += $(top_srcdir)/lib/libgtest.la
+cryptagram_test_LDADD += $(top_srcdir)/lib/libgtest_main.la
+
 
 # bin_programs += aesthete_thread_runner
 # aesthete_thread_runner_SOURCES = aesthete_thread_runner.cc

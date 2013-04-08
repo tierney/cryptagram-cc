@@ -3,7 +3,7 @@
 namespace cryptagram {
 
 struct RGB {
-  RGB(int r, int g, int b);
+  RGB(int r, int g, int b) : r(r), g(g), b(b) {}
 
   int r;
   int g;

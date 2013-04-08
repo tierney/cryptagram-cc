@@ -2,6 +2,9 @@
 
 #include "coordinate.h"
 #include "rgb.h"
+#include "boost/scoped_array.hpp"
+
+using boost::scoped_array;
 
 namespace cryptagram {
 
@@ -15,6 +18,9 @@ class Image {
 
   bool Write(const Coordinate& coord, const RGB& rgb);
 
+  unsigned char* GetImage() { return pixel_vals_.get(); }
+  int GetImageSize() { return width_ * height_ * 3; }
+
   int width() { return width_; }
   int height() { return height_; }
 
@@ -25,7 +31,7 @@ class Image {
   int height_;
 
   // 3 bytes per pixel ind RGB order. width_ * height_ * 3 values.
-  unsigned char* pixel_vals_;
+  scoped_array<unsigned char> pixel_vals_;
 };
 
 } // namespace cryptagram

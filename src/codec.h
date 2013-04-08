@@ -8,6 +8,8 @@
 
 #include "gtest/gtest_prod.h"
 
+using std::map;
+
 namespace cryptagram {
 
 const int kSpecialThreshold = 8; // For the header block, we need to not write
@@ -31,10 +33,12 @@ class Codec {
 
   Image* img_;
 
-  std::map<int, RGB> val_to_rgb_;
+  map<int, RGB> val_to_rgb_;
 
-  int cur_w;
-  int cur_h;
+  int cur_w_;
+  int cur_h_;
+
+  DISALLOW_COPY_AND_ASSIGN(Codec);
 };
 
 } // namespace cryptagram
