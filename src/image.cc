@@ -7,12 +7,8 @@ namespace cryptagram {
 Image::Image(int width, int height)
     : width_(width), height_(height) {
   pixel_vals_.reset(new unsigned char[width * height * 3]);
-  for (int h = 0; h < height; h++) {
-    for (int w = 0; w < width; w++) {
-      for (int i = 0; i < 3; i++) {
-        pixel_vals_[h * width * 3 + (3 * w) + i] = 0;
-      }
-    }
+  for (int i = 0; i < width * height * 3; i++) {
+    pixel_vals_[i] = 0;
   }
 }
 
@@ -31,7 +27,7 @@ int Image::IndexFromCoordinate(const Coordinate& coord) {
   printf("Coord w:%d h:%d\n", coord.w, coord.h);
   int rows = coord.h * width_ * 3;
   int row_col_idx = rows + (coord.w * 3);
-  printf("  Index: %d\n", row_col_idx);
+  // printf("  Index: %d\n", row_col_idx);
   return row_col_idx;
 }
 

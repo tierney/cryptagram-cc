@@ -12,9 +12,10 @@ using std::map;
 
 namespace cryptagram {
 
-const int kFirstRowAfterHeader = 8; // For the header block, we need to not write
-                                 // in the first columns of kFirstRowAfterHeader
-                                 // rows.
+const int kFirstRowAfterHeader = 8; // For the header block, we need to not
+                                    // write in the first columns of
+                                    // kFirstRowAfterHeader rows.
+
 const int kFirstColumnAfterHeader = 8;
 
 class Codec {
