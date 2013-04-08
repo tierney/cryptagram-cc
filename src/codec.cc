@@ -50,8 +50,6 @@ void Codec::Next(Coordinate* coord) {
     coord->w = cur_w_ + 1;
     coord->h = cur_h_;
   }
-  // CHECK(coord->w < img_->width());
-  // CHECK(coord->h < img_->height());
 }
 
 } // namespace cryptagram
